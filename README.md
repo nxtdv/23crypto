@@ -1,7 +1,7 @@
 # 🔗 23crypto
 Preview: https://streamable.com/5comuk
 
-**Simple système de Cryptomonnaie.**
+**Simple système de Cryptomonnaie avec une API.**
 | File | Description |
 | :--- | :--- |
 | [`client.lua`](./client/main.lua) | Côté client.
