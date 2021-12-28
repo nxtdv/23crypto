@@ -97,7 +97,7 @@ AddEventHandler("sellAllCrypto", function(id, quantity)
         MySQL.Async.execute(_query, {
             ['@id'] =  id
         }, function (result)
-            xPlayer.addAccountMoney('money', _reward)
+            xPlayer.addMoney(_reward)
             TriggerClientEvent('esx:showNotification', _source, ("Vous avez vendu tout votre %s pour : %s ~g~$~s~"):format(nom, _reward))
         end)
     end
@@ -121,7 +121,7 @@ AddEventHandler("buyCrypto", function(quantity, name)
             ['@e'] = getLocalTime(),
             ['@f'] = prix
         }, function (result)
-            xPlayer.removeAccountMoney('money', _quantity)
+            xPlayer.removeMoney(_quantity)
             TriggerClientEvent('esx:showNotification', _source, ("Vous avez ~g~acheter~s~ %s %s pour : %s ~g~$~s~"):format(_calcul, nom, _quantity))
         end)
     else
