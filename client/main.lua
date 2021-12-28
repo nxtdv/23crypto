@@ -5,7 +5,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 apiCrypto = function()
     local main = RageUI.CreateMenu(('%s'):format(config.label.MENU_NAME), ("%s"):format(config.label.MENU_NAME))
     local myWallet = RageUI.CreateSubMenu(main, ('%s'):format(config.label.MENU_NAME), ("%s"):format(config.label.MENU_DESC_WALLET))
-    local sub = RageUI.CreateSubMenu(main, ('%s'):format(config.label.MENU_NAME), ("%s"):format(config.label.MENU_DESC_WALLET))
+    local sub = RageUI.CreateSubMenu(myWallet, ('%s'):format(config.label.MENU_NAME), ("%s"):format(config.label.MENU_DESC_WALLET))
     local crypto = RageUI.CreateSubMenu(main, ('%s'):format(config.label.MENU_NAME), ("%s"):format(config.label.MENU_DESC_INFO_CRYPTO))
 
     RageUI.Visible(main, not RageUI.Visible(main)) 

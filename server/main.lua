@@ -109,13 +109,11 @@ AddEventHandler("buyCrypto", function(quantity, name)
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
     local identifier = getIdentifiers(_source)
-    if _quantity == nil or _quantity == 0 then
-        TriggerClientEvent('esx:showNotification', _source, "~r~Error ~s~: quantité invalide")
-        return
-    end
-    if xPlayer.getAccount('money').money >= _quantity then
+    if _quantity == nil or _quantity == 0 then return end
+    if xPlayer.getMoney() >= _quantity then
         local _calcul = _quantity / prix
-        MySQL.Async.execute('INSERT INTO crypto (owner, currency, numberOfCrypto, amountInvested, dateOfPurchase, purchasePrice) VALUES (@a, @b, @c, @d, @e, @f)', {
+        local query = 'INSERT INTO crypto (owner, currency, numberOfCrypto, amountInvested, dateOfPurchase, purchasePrice) VALUES (@a, @b, @c, @d, @e, @f)'
+        MySQL.Async.execute(query, {
             ['@a'] = identifier,
             ['@b'] = name,
             ['@c'] = _calcul,
@@ -126,8 +124,9 @@ AddEventHandler("buyCrypto", function(quantity, name)
             xPlayer.removeAccountMoney('money', _quantity)
             TriggerClientEvent('esx:showNotification', _source, ("Vous avez ~g~acheter~s~ %s %s pour : %s ~g~$~s~"):format(_calcul, nom, _quantity))
         end)
-    else 
+    else
         TriggerClientEvent('esx:showNotification', _source, "~r~Error ~s~: Tu n'as pas assez d'argent")
+        return
     end
 end)
 
