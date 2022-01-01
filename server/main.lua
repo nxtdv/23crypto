@@ -143,6 +143,8 @@ round = function(x, n)
     return x / n
 end
 
+---@class getIdentifiers
+---@param _src number
 getIdentifiers = function(_src)
     local xPlayer = ESX.GetPlayerFromId(_src)
     local identifier = xPlayer.identifier

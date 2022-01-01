@@ -1,5 +1,5 @@
 
-ESX, data, DB = nil, {}, {}
+ESX, data, DB, lock = nil, {}, {}, true
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 apiCrypto = function()
@@ -30,7 +30,7 @@ apiCrypto = function()
         RageUI.IsVisible(myWallet, function()                 
             if countTable(DB) > 0 then
                 for _, v in pairs(DB) do
-                    RageUI.Button(("[~o~%s~s~] %s"):format(v.id, v.currency), nil, {RightLabel = ("~o~%s~s~ >"):format(v.numberOfCrypto)}, true, {
+                    RageUI.Button(("[~o~%s~s~] %s"):format(v.id, v.currency), nil, {RightLabel = ("~o~%s~s~ >"):format(v.numberOfCrypto)}, lock, {
                         onSelected = function()
                             id = v.id
                             currency = v.currency
@@ -97,6 +97,7 @@ apiCrypto = function()
                 onSelected = function()
                     TriggerServerEvent("sellAllCrypto", id, number)
                     RageUI.GoBack()
+                    lockSys()
                 end
             })
         end)
@@ -126,4 +127,10 @@ RefreshPlayerData = function()
     ESX.TriggerServerCallback('getDatabase', function(showDataDB)
         DB = showDataDB
     end)
+end
+
+lockSys = function()
+    lock = false
+    Wait(4000)
+    lock = true
 end
